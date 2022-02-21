@@ -1,0 +1,17 @@
+{% load static %}
+
+
+    {% if videos %}
+        <ul>
+            {% for v in videos %}
+                <div  align = "center"><li>{{v.video_name}}</li>
+                   <video width = "400" height = "400" controls = "controls" autoplay = "autoplay">
+                        <source src = "{% static 'funny_videos/videos/'%}{{ v.video_name }}" type = "video/mp4">
+                    </video>
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There is no videos</p>
+    {% endif %}
+</body>
