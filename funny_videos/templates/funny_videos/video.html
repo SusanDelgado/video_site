@@ -1,11 +1,13 @@
 {% load static %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'funny_videos/style.css' %}">
 
-
+<button onclick = "window.location.href = '/funny_videos/add_new'">Add new video</button>
     {% if videos %}
         <ul>
             {% for v in videos %}
-                <div  align = "center"><li>{{v.video_name}}</li>
-                   <video width = "400" height = "400" controls = "controls" autoplay = "autoplay">
+                <div  align = "center" id = "{{ v.id }}">
+                    <li>{{v.video_name}}</li>
+                   <video width = "600" height = "600" controls = "controls" loop = "loop">
                         <source src = "{% static 'funny_videos/videos/'%}{{ v.video_name }}" type = "video/mp4">
                     </video>
                 </div>
@@ -14,4 +16,37 @@
     {% else %}
         <p>There is no videos</p>
     {% endif %}
-</body>
+<script>
+    var i = 0;
+    var v = document.getElementsByTagName('video');
+    document.getElementsByTagName('video')[0].play();
+    document.addEventListener('keydown', function(event){
+        if(event.code == 'ArrowDown'){
+            window.scrollBy(0,560);
+            document.getElementsByTagName('video')[i].pause();
+            if(i + 1 != v.length){
+                i = i + 1;
+            }
+            document.getElementsByTagName('video')[i].currentTime = 0;
+            document.getElementsByTagName('video')[i].play();
+        }
+        if(event.code == 'ArrowUp'){
+            window.scrollBy(0,-560);
+            document.getElementsByTagName('video')[i].pause();
+            if(i - 1 != -1){
+                i = i - 1;
+            }
+            document.getElementsByTagName('video')[i].currentTime = 0;
+            document.getElementsByTagName('video')[i].play();
+        }
+        if(event.code == 'KeyF'){
+            if(document.getElementsByTagName('video')[i].paused == true){
+                document.getElementsByTagName('video')[i].play();
+            }
+            else{
+                document.getElementsByTagName('video')[i].pause();
+                document.getElementsByTagName('video')[i].urrentTime = 0;
+            }
+        }
+    });
+</script>

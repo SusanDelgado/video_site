@@ -10,4 +10,5 @@ def index(request):
 
     return HttpResponse(template.render(context, request))
 
-# Create your views here.
+def add_new(request):
+    return HttpResponse('Adding_video')
