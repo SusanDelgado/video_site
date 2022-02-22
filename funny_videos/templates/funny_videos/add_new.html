@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <form method = "post" enctype = "multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type = "file" id = "file_name" onchange = "updateLabel()">
+            <script>
+                function updateLabel(){
+                    s = document.getElementById('file_name').files[0];
+                    document.getElementsByName('video_name')[0].value = s.name;
+                }
+            </script>
+            <button type = "submit" value = "Download">Add new video</button>
+        </form>
+    </body>
+</html>
